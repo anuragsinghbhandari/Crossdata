@@ -1,0 +1,22 @@
+[project]
+name = "crossdata"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.135.1",
+    "python-multipart>=0.0.22",
+    "sarvamai>=0.1.26",
+    "synthetic-data-kit",
+    "uvicorn>=0.41.0",
+    "razorpay>=1.0.0",
+]
+
+[tool.uv.workspace]
+members = [
+    "synthetic-data-kit/synthetic_data_kit",
+]
+
+[tool.uv.sources]
+synthetic-data-kit = { workspace = true }
