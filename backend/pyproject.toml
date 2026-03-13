@@ -15,7 +15,7 @@ dependencies = [
 
 [tool.uv.workspace]
 members = [
-    "synthetic-data-kit/synthetic_data_kit",
+    "synthetic_data_kit/synthetic_data_kit",
 ]
 
 [tool.uv.sources]

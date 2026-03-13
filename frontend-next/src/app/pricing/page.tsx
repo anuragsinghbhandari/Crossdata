@@ -1,14 +1,29 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import type { RazorpayOrderOptions } from 'razorpay'
 import { getSessionSafe, supabase } from '../../lib/supabaseClient'
 import Navbar from '@/components/Navbar'
 import { ensureUserProfile, formatSupabaseError } from '@/lib/userProfile'
 
+type RazorpayPaymentResponse = {
+  razorpay_payment_id: string
+  razorpay_order_id: string
+  razorpay_signature: string
+}
+
+type RazorpayOrderOptions = {
+  key: string
+  order_id: string
+  amount: number
+  currency: string
+  name: string
+  description: string
+  handler: (response: RazorpayPaymentResponse) => void | Promise<void>
+}
+
 declare global {
   interface Window {
-    Razorpay?: new (options: RazorpayOrderOptions) => { open: () => void }
+    Razorpay?: any
   }
 }
 
