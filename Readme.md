@@ -180,27 +180,3 @@ Use these target language codes when configuring translation:
 | Tamil | `ta-IN` |
 | Telugu | `te-IN` |
 | Urdu | `ur-IN` |
-
-## Notes on Payments
-
-- The current frontend pricing flow uses Next.js API routes for Razorpay order creation and verification.
-- The backend also contains Razorpay endpoints, but the frontend pricing page is wired to the frontend API routes.
-- Credits are stored in Supabase and updated after successful payment verification.
-
-## Known Gaps
-
-- The repo still has existing lint issues in unrelated frontend files.
-- There is no fully documented production deployment setup yet.
-- Secrets and provider-specific config should be reviewed before deploying publicly.
-
-## Development Tips
-
-- Frontend code lives in `frontend-next/src`.
-- The Supabase client is initialized in `frontend-next/src/lib/supabaseClient.ts`.
-- The pipeline UI lives in `frontend-next/src/app/pipeline/page.tsx`.
-- The FastAPI entrypoint is `backend/main.py`.
-- Intermediate and final pipeline outputs are persisted under `backend/data/runs`.
-
-## License
-
-No root license file is currently defined in this repository.
