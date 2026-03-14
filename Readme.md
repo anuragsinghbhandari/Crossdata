@@ -180,3 +180,41 @@ Use these target language codes when configuring translation:
 | Tamil | `ta-IN` |
 | Telugu | `te-IN` |
 | Urdu | `ur-IN` |
+
+```mermaid
+---
+config:
+  layout: dagre
+---
+flowchart TD
+    U[Frontend / Client]
+    
+    U -->|POST /process-stream\nmultipart files + options| API
+    U -->|GET /download/<run_id>| API
+    API --> PAY[Razorpay Integration]
+    PAY --> RP[Razorpay API]
+    subgraph Runtime["Backend Processing Runtime"]
+
+        API --> RUN[Run Workspace\n/data/runs/<run_id>]
+        API --> CFG[Config Loader\nsynthetic_data_kit.utils.config]
+        API --> INGEST[Stage 1: Ingest]
+        INGEST --> PARSERS[Parsers\nPDF / HTML / DOCX / PPTX / TXT / YouTube]
+        PARSERS --> LANCE[Lance Dataset\nparsed/*.lance]
+        LANCE --> TRANS[Stage 2: Translate]
+        TRANS --> TXT[translated.txt]
+        TXT --> CREATE[Stage 3: Create QA]
+        CREATE --> LLM[LLM Client]
+        LLM --> SARVAM[Sarvam / OpenAI Compatible API]
+        CREATE --> GEN[generated/*_qa_pairs.json]
+        GEN --> CURATE[Stage 4: Curate QA]
+        CURATE --> LLM
+        CURATE --> CLEAN[curated/cleaned.json]
+        CLEAN --> FORMAT[Stage 5: Export]
+        FORMAT --> FINAL[final/\njsonl , alpaca , ft , chatml , hf zip]
+
+    end
+    API --> SSE[Server-Sent Events Stream]
+    SSE --> U
+    FINAL --> API
+    API -->|FileResponse| U
+```
