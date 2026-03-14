@@ -12,5 +12,4 @@ data/\ndata/\n*.pdf
 .venv-ci/
 data/
 example_output
-config.yaml
 .venv/
