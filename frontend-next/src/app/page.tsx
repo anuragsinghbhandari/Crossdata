@@ -86,7 +86,7 @@ export default function Home() {
             Start Processing
           </Link>
           <a
-            href="https://github.com/anuragbhandari"
+            href="https://github.com/anuragsinghbhandari/crossdata"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-900 shadow-sm transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900 w-full sm:w-auto"
